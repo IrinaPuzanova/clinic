@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="UTF-8"?><sqlb_project><db path="C:/Users/iroch/Desktop/DB LRX/Cosmetology clinic.db" readonly="0" foreign_keys="1" case_sensitive_like="0" temp_store="0" wal_autocheckpoint="1000" synchronous="2"/><attached/><window><main_tabs open="structure browser pragmas query" current="1"/></window><tab_structure><column_width id="0" width="544"/><column_width id="1" width="0"/><column_width id="2" width="165"/><column_width id="3" width="5484"/><column_width id="4" width="0"/><expanded_item id="0" parent="1"/><expanded_item id="1" parent="1"/><expanded_item id="2" parent="1"/><expanded_item id="3" parent="1"/></tab_structure><tab_browse><current_table name="4,7:mainDoctors"/><default_encoding codec=""/><browse_table_settings><table schema="main" name="Diagnosis" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="159"/><column index="2" value="300"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table><table schema="main" name="Doctors" show_row_id="0" encoding="" plot_x_axis="" unlock_view_pk="_rowid_"><sort/><column_widths><column index="1" value="104"/><column index="2" value="182"/><column index="3" value="429"/></column_widths><filter_values/><conditional_formats/><row_id_formats/><display_formats/><hidden_columns/><plot_y_axes/><global_filter/></table></browse_table_settings></tab_browse><tab_sql><sql name="CREATE">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Создание таблицы &quot;Врач&quot;.
+*/
+CREATE TABLE &quot;Doctor&quot; (DoctorID INT, LastName TEXT, FirstName TEXT, Specialization TEXT, Qualification TEXT);</sql><sql name="CREATE">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Создание таблицы &quot;Мед.карты&quot;
+*/
+CREATE TABLE &quot;MedicalCard&quot; (NumberCard INT, PatientID INT, ProcedureSheetID INT);</sql><sql name="CREATE">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Создание таблицы &quot;Процедурный лист&quot;.
+*/
+CREATE TABLE &quot;Procedure sheet&quot; 
+(
+ProcedureSheetID INT, 
+NumberCard INT, 
+date, 
+MedicalProcedureID INT, 
+CodeMedicalProcedure INT, 
+NameMedProcedure TEXT,
+DoctorID INT, 
+DoctorAppointment TEXT);</sql><sql name="CREATE">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Создание таблицы &quot;Номенклатура мед.процедур&quot;.
+*/
+CREATE TABLE &quot;Nomenclature of medical procedures&quot; (ID INT, CodeProcedure INT, NameMedProcedure TEXT);</sql><sql name="CREATE">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Создание таблицы &quot;Специализации&quot;.
+*/
+CREATE TABLE &quot;SpecializationDoctor&quot; (ID INT, Specialization TEXT);</sql><sql name="ALTER RENAME">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Переименование столбца.
+*/
+ALTER TABLE &quot;Nomenclature of medical procedures&quot;
+RENAME COLUMN &quot;ID&quot; TO &quot;NomenMedProcID&quot;;</sql><sql name="ALTER ADD">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 31.01.2024
+DESCRIPTION: Добавление столбца.
+*/
+ALTER TABLE &quot;Patients&quot;
+ADD Gender TEXT;</sql><sql name="DROP">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Удаление таблицы.
+*/
+DROP TABLE &quot;Qualification of a doctor&quot;;</sql><sql name="INSERT">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Добавление данных.
+*/
+INSERT INTO NomenOfMedProcedures (NomenCodeProcedure, NameMedProcedure)
+VALUES 
+('В 01.008.003', 'Прием (осмотр, консультация) врача-косметолога
+первичный'), ('В 01.008.004', 'Прием (осмотр, консультация) врача-косметолога 
+повторный'), ('В 01.008.001', 'Прием (осмотр, консультация) врача-дерматовенеролога 
+(только по дерматологии) первичный'), ('В 01.008.002', 'Прием (осмотр, консультация) врача-дерматовенеролога 
+(только по дерматологии) повторный'), ('А 03.01.001', 'Осмотр кожи под увеличением (дерматоскопия)');</sql><sql name="INSERT">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Добавление данных.
+*/
+INSERT INTO Doctors (FullName)
+VALUES ('Литвинова Элина Борисовна'), ('Теплова Евгения Константиновна');</sql><sql name="INSERT">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Добавление данных. 
+*/
+INSERT INTO Diagnosis (NameOfTheDiagnosis)
+VALUES ('Доброкачественное кожное новообразование'),
+('Розацеа'),
+('Купероз, сосуд сеточка'),
+('Акне, угревая болезнь'),
+('Рубцы, стрии'),
+('Нарушение трофики кожи');</sql><sql name="INSERT">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Добавление данных. 
+*/
+INSERT INTO MedicalCard (PatientID, FullNamePatient)
+VALUES ('2', 'Степанов Петр Шамильевич'), ('3', 'Беляева Ульяна Дмитрьевна'), ('4', 'Титов Иван Маркович'), ('5', 'Осипов Константин Павлович'),
+('6','Вавилов Леонид Геннадьевич'), ('7','Суворова Веста Мансуровна'), ('8', 'Носкова Анастасия Кирилловна'), ('9','Никитина Яна Евгеньевна'),
+('10','Сидоров Александр Геннадьевич');
+</sql><sql name="INSERT">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 23.02.2024
+DESCRIPTION: Добавление данных. 
+*/
+INSERT INTO ProcedureSheet 
+(date, 
+NomenCodeProcedure, 
+NumberCard,
+NameMedProcedure, 
+DoctorID, 
+DoctorAppointment, 
+MedProcID, 
+CodeDiagnosis,
+DoctorFullName, 
+PatientID)
+VALUES 
+('06.06.2023', 'А 11.01.012', '3', 'Введение искусственных имплантатов в мягкие ткани: 
+Juvederm ultra smile (0,55 мл)', '3', 'Создание обьема препаратом', '8', '1', 'Литвинова Элина Борисовна', '3'),
+('06.06.2023', 'А 16.01.017', '4', 'Удаление доброкачественных новообразований кожи
+(родинка, гемангиома, лицо, до 5 мм за 1 ед.)', '3', 'Удаление', '18', '3', 'Теплова Евгения Константиновна', '4'),
+('06.06.2023', 'А 11.01.012', '7', 'Введение искусственных имплантатов в мягкие ткани: 
+Juvederm ultra smile (0,55 мл)', '3', 'Создание обьема препаратом', '8', '1', 'Литвинова Элина Борисовна', '7'),
+('06.06.2023', 'А 16.01.017', '9', 'Удаление доброкачественных новообразований кожи
+(родинка, гемангиома, лицо, до 5 мм за 1 ед.)', '3', 'Удаление', '18', '3', 'Теплова Евгения Константиновна', '9');</sql><sql name="INSERT">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Добавление данных.
+*/
+INSERT INTO Patients (FullName, DateBirthday, Gender, Address, PhoneNumber)
+VALUES 
+('Тарасова Кира Герасимовна', '31.10.1980', 'ж','Дубна, Векслера 50-117', '+7(067) 704-03-42'), 
+('Степанов Петр Шамильевич', '07.05.1981', 'м', 'Дубна, Боголюбова 48-245',  '+7 (592) 567-56-47'),
+('Беляева Ульяна Дмитрьевна', '09.10.1989', 'ж', 'Дубна, Боголюбова 117-65', '+7 (077) 213-71-99'),
+('Титов Иван Маркович', '14.05.1984', 'м', 'Дубна, Вернова 3а - 110', '+7 (112) 045-74-46'),
+('Осипов Константин Павлович', '11.02.1977', 'м',  'Дубна, Вокзальная 48 - 36', '+7 (940) 832-56-31'),
+('Вавилов Леонид Геннадьевич', '30.01.1978', 'м', 'Дубна, Блохинцева 26- 311',  '+7 (048) 357-39-88'),
+('Суворова Веста Мансуровна', '14.03.1979', 'ж', 'Дубна, Дачная 25 - 78', '+7 (605) 113-18-76'),
+('Носкова Анастасия Кирилловна', '15.11.1979', 'ж', 'Дубна, Ленинградская 110 - 11', '+7 (367) 091-44-17'),
+('Никитина Яна Евгеньевна', '06.05.1975', 'ж',  'Дубна, Большеволжская 6 -10','+7 (117) 345-98-83'),
+('Сидоров Александр Геннадьевич', '09.06.1981', 'м', 'Дубна, Боголюбова 25 -365','+7 (157) 374-43-73');</sql><sql name="UPDATE">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Добавление данных в столбец уже созданной таблицы. 
+*/
+UPDATE Doctors
+SET Specialization = 'Дерматовенеролог'
+WHERE DoctorID = 4;</sql><sql name="UPDATE">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 23.02.2024
+DESCRIPTION: Добавление данных в столбец уже созданной таблицы. 
+*/
+UPDATE ProcedureSheet
+SET DoctorFullName = 'Аверкова Светлана Сергеевна'
+WHERE ProcedureSheetID = 1;</sql><sql name="INNER JOIN">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 23.02.2024
+DESCRIPTION: Соединение двух таблиц Patients и MedicalCard (Inner join). 
+*/
+SELECT *
+FROM
+Patients
+INNER JOIN
+MedicalCard
+on
+Patients.PatientID = MedicalCard.PatientID
+LIMIT 10;</sql><sql name="INNER JOIN">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 30.01.2024
+DESCRIPTION: Соединение таблиц. 
+*/
+SELECT *
+FROM
+Patients
+INNER JOIN
+MedicalCard
+on
+Patients.PatientID = MedicalCard.PatientID
+INNER JOIN
+ProcedureSheet
+on
+ProcedureSheet.NumberCard = MedicalCard.NumberCard
+ORDER by PatientID;</sql><sql name="IN.JOIN, ORDER BY">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 23.02.2024
+DESCRIPTION: INNER JOIN нескольких таблиц.
+*/
+SELECT 
+Patients.FullName,
+Patients.DateBirthday,
+MedicalCard.NumberCard,
+ProcedureSheet.NameMedProcedure
+FROM
+Patients
+INNER JOIN
+MedicalCard
+on
+Patients.PatientID = MedicalCard.PatientID
+INNER JOIN
+ProcedureSheet
+on
+ProcedureSheet.NumberCard = MedicalCard.NumberCard
+ORDER BY Patients.FullName;
+
+
+</sql><sql name="INNER, AS, ||''||">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 23.02.2024
+DESCRIPTION: INNER JOIN нескольких таблиц с использованием псевдонимов и конкатенации.
+*/
+SELECT 
+Pat.FullName as [Фамилия Имя Отчество],
+Pat.DateBirthday as [Дата рождения],
+MC.NumberCard as [Номер карты],
+Nomen.NomenCodeProcedure ||'  '|| PS.NameMedProcedure as [Процедура]
+FROM
+Patients as Pat
+INNER JOIN
+MedicalCard as MC
+on
+Pat.PatientID = MC.PatientID
+INNER JOIN
+ProcedureSheet as PS
+on
+PS.NumberCard = MC.NumberCard
+INNER JOIN
+NomenOfMedProcedures as Nomen
+on 
+Nomen.MedProcID = PS.MedProcID;
+
+
+</sql><sql name="LEFT JOIN">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 23.02.2024
+DESCRIPTION: LEFT JOIN нескольких таблиц с использованием псевдонимов и конкатенации.
+*/
+SELECT 
+Pat.FullName as [Фамилия Имя Отчество],
+Pat.DateBirthday as [Дата рождения],
+MC.NumberCard as [Номер карты],
+Nomen.NomenCodeProcedure ||'  '|| PS.NameMedProcedure as [Процедура]
+FROM
+Patients as Pat
+LEFT JOIN
+MedicalCard as MC
+on
+Pat.PatientID = MC.PatientID
+LEFT JOIN
+ProcedureSheet as PS
+on
+PS.NumberCard = MC.NumberCard
+INNER JOIN
+NomenOfMedProcedures as Nomen
+on 
+Nomen.MedProcID = PS.MedProcID;
+</sql><sql name="lEFT JOIN, ORDER BY">/*
+CREATED BY: Пузанова Ирина
+CREATED ON: 23.02.2024
+DESCRIPTION: LEFT JOIN, ORDER BY. Вывести список 
+*/
+SELECT
+Patients.FullName,
+MedicalCard.NumberCard
+FROM
+Patients
+LEFT JOIN
+MedicalCard
+ON Patients.PatientID = MedicalCard.PatientID
+ORDER BY NumberCard;
+</sql><sql name="COUNT">SELECT count (*) as [Общее кол-во пациентов]
+FROM Patients</sql><sql name="SQL 96">SELECT count (*) as [Кол-во женщин среди пациентов]
+FROM Patients
+WHERE Gender = 'ж';</sql><sql name="SQL 97">SELECT count (*) as [Кол-во женщин среди пациентов],
+FROM Patients
+WHERE Gender = 'ж';</sql><current_tab id="23"/></tab_sql></sqlb_project>
